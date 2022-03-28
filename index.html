@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="world" data-world>
+    <div class="char-select" data-charsel> 
+      <div class="sel-player" sel-player> Select a Player 选择一名球员<br>
+      Fei 菲------  or ----- Sjoerd 大树</div>
+      <img src="imgs/f-stationary.png" class="selfei" selfei id="selfei">
+      <img src="imgs/s-stationary.png" class="selsjoerd" selsjoerd id="selsjoerd">
+      <footer class="footer" footer>
+        Bigger-Tree &copy; 2022<br>
+      </footer>
+    </div>
+    <div class="game" data-game>
+      <div class="score" data-score>0</div>
+      <div class="start-screen" data-start-screen>Press Any Key To Start 按任意键开始 <br> 
+      Press space-bar to jump 按空格键跳跃</div>
+      <div class="end-text" data-end-text>We're expecting a baby! <br>
+        我们期待一个婴儿！<br>
+        We verwachten een baby! 
+      </div>
+      <img src="imgs/level-f.png" class="levels" data-ground>
+      <img src="imgs/level-f.png" class="levels" data-ground>
+      <!--  -->
+      <img src="imgs/present.png" class="endtrigger" data-endtrigger>
+      <img src="imgs/trigger.png" class="jointrigger" data-jointrigger>
+      <img src="imgs/trigger.png" class="jointrigger2" data-jointrigger2>
+      <img src="imgs/trigger.png" class="leavetrigger" data-leavetrigger>
+      <!--  -->
+      <img src="imgs/f-stationary.png" class="persons" data-s>
+      <img src="imgs/trigger.png" class="personf" data-f>
+      <img src="imgs/trigger.png" class="baby" data-b>
+      <img src="imgs/fireworks-0.png" class="fireworks" data-fw>
+    </div>
+    
+  </div>
+  
+  <script src="script.js" type="module"></script>
+</body>
+</html>
