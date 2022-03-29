@@ -5,11 +5,18 @@ import { updateGround, setupGround } from "./ground.js"
 import { updates, setups, getsRect, setsLose, setsEnd } from "./persons.js"
 import { setupwm, updatewm, getwmRects } from "./windmill.js"
 import { setfEnd, setfjoin, setfleave, setfLose, setupf, updatef } from "./follower.js"
-import { updateb, setupb, getbRect, setbEnd} from "./baby.js"
+import { updateb, setupb, getbRect, setbEnd, setbendscreen} from "./baby.js"
 import { setupfw, updatefw } from "./fireworks.js"
 
+// to do:
+// change follower based on feiisselected
+// change triggers based on feiisselected
+// clean up texts layout
+// add sound
+// put game online
+// test mobile (controls)
 
-const WORLD_WIDTH = 100
+const WORLD_WIDTH = 75  
 const WORLD_HEIGHT = 30
 const SPEED_SCALE_INCREASE = 0.0000001
 
@@ -21,16 +28,14 @@ const endtextElem = document.querySelector("[data-end-text]")
 const fwElem = document.querySelector("[data-fw]")
 const charselelem = document.querySelector("[data-charsel")
 const gameelem = document.querySelector("[data-game")
-const selfei = document.querySelector("[selfei")
-const selsjoerd = document.querySelector("[selsjoerd")
+const endelem = document.querySelector("[data-endscreen")
+// const selfei = document.querySelector("[selfei")
+// const selsjoerd = document.querySelector("[selsjoerd")
 
 setPixelToWorldScale()
 window.addEventListener("resize", setPixelToWorldScale)
-// document.addEventListener("keydown", handleStart, { once: true })
-fElem.classList.add("hide")
-fwElem.classList.add("hide")
-endtextElem.classList.add("hide")
-gameelem.classList.add("hide")
+document.addEventListener("DOMContentLoaded", startscreen, {once: true })
+
 
 let lastTime
 let speedScale
@@ -44,33 +49,45 @@ let selectsjoerd
 
 feiisselected = 2
 
-window.addEventListener('load', (event) => {
-  console.log('The page has fully loaded');
-});
 
+function startscreen(){
+  fElem.classList.add("hide")
+  fwElem.classList.add("hide")
+  endtextElem.classList.add("hide")
+  gameelem.classList.add("hide")
+  endelem.classList.add("hide")
+  charselelem.classList.remove("hide")
+  setupwm()
+  // startscreen controls
+  selectfei = document.getElementById('selfei')
+  selectfei.addEventListener("click", feiselected, { once: true })
+  selectfei.addEventListener("touchstart", feiselected);
 
-selectfei = document.getElementById('selfei')
-selectfei.addEventListener("click", feiselected, { once: true })
-selectsjoerd = document.getElementById('selsjoerd')
-selectsjoerd.addEventListener("click", sjoerdselected, { once: true })
+  selectsjoerd = document.getElementById('selsjoerd')
+  selectsjoerd.addEventListener("click", sjoerdselected, { once: true })
+  selectsjoerd.addEventListener("touchstart", sjoerdselected);
+}
 
 function feiselected(){
   feiisselected = 1
   document.addEventListener("keydown", handleStart, { once: true })
+  document.addEventListener("touchstart", handleStart, { once: true })
   gameelem.classList.remove("hide")
   charselelem.classList.add("hide")
-
-  console.log(feiisselected)
+  setups(feiisselected)
+  setupGround(feiisselected)
 }
 
 function sjoerdselected(){
   feiisselected = 0
   document.addEventListener("keydown", handleStart, { once: true })
+  document.addEventListener("touchstart", handleStart, { once: true })
   gameelem.classList.remove("hide")
   charselelem.classList.add("hide")
-
-  console.log(feiisselected)
+  setups(feiisselected)
+  setupGround(feiisselected)
 }
+
 
 function update(time) {
   if (lastTime == null) {
@@ -82,9 +99,9 @@ function update(time) {
 
   if (end <= 0) {
     updateGround(delta, speedScale)
-    updates(delta, speedScale)
+    updates(delta, speedScale, feiisselected)
     if (join >= 1) updatef(delta, speedScale, join)
-    updatewm(delta, speedScale)
+    updatewm(delta, speedScale, feiisselected)
     updateSpeedScale(delta, end)
     updateScore(delta)
     updateendtrigger(delta, speedScale)
@@ -166,9 +183,7 @@ function handleStart() {
   join = 0
   end = 0
   babyrun = 0
-  setupGround()
   setupwm()
-  setups()
   setupb()
   setupfw()
   startScreenElem.classList.add("hide")
@@ -179,16 +194,14 @@ function handleStart() {
   setupjointrigger()
   setupjointrigger2()
   setupleavetrigger()
-
 }
 
 function handleLose() {
-  setsLose()
+  setsLose(feiisselected)
   if (join >= 1) setfLose()
-  setupGround()
   setTimeout(() => {
-    document.addEventListener("keydown", handleStart, { once: true })
-    startScreenElem.classList.remove("hide")
+    document.addEventListener("keydown", startscreen, { once: true })
+    document.addEventListener("touchstart", startscreen, { once: true })
   }, 100)
  
 }
@@ -207,10 +220,12 @@ function handleLeave() {
 // 
 function handleEnd() {
   end = 1
-  setsEnd()
-  if (join == 1) setfEnd()
+  setsEnd(feiisselected)
+  setfEnd()
   setupwm()
   fwElem.classList.remove("hide")
+  document.addEventListener("keydown", endscreen, { once: true })
+  document.addEventListener("touchstart", endscreen, { once: true })
 }
 
 function handlebabystop() {
@@ -218,6 +233,14 @@ function handlebabystop() {
   setbEnd()
   endtextElem.classList.remove("hide")
 
+}
+
+function endscreen(){
+  gameelem.classList.add("hide")
+  setbendscreen()
+  endelem.classList.remove("hide")
+  document.addEventListener("keydown", startscreen, { once: true })
+  document.addEventListener("touchstart", startscreen, { once: true })
 }
 
 function setPixelToWorldScale() {

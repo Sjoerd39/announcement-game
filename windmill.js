@@ -14,6 +14,16 @@ const worldElem = document.querySelector("[data-world]")
 let currentFrameTime
 let nextWMTime
 let wmFrame
+let porw
+
+function pandaorwindmill(feiisselected){
+  if (feiisselected === 1){
+    return porw =  `panda`
+  }
+  if (feiisselected === 0){
+    return porw = 'windmill'
+  }
+}
 
 export function setupwm() {
   nextWMTime = WM_INTERVAL_MIN
@@ -23,7 +33,9 @@ export function setupwm() {
 }
 
 
-export function updatewm(delta, speedScale) {
+export function updatewm(delta, speedScale, feiisselected) {
+  porw = pandaorwindmill(feiisselected)
+
   document.querySelectorAll("[data-wm]").forEach(wm => {
     incrementCustomProperty(wm, "--left", delta * speedScale * SPEED * -1)
      if (getCustomProperty(wm, "--left") <= -10) {
@@ -32,12 +44,12 @@ export function updatewm(delta, speedScale) {
     }
     if (currentFrameTime >= FRAME_TIME) {
       wmFrame = (wmFrame + 1) % WM_FRAME_COUNT
-      wm.src = `imgs/panda-${wmFrame}.png`
+      wm.src = `imgs/${porw}-${wmFrame}.png`
       currentFrameTime -= FRAME_TIME
     }    
   })
   if (nextWMTime <= 0) {
-    createwm()
+    createwm(feiisselected)
     nextWMTime =
       randomNumberBetween(WM_INTERVAL_MIN, WM_INTERVAL_MAX) / speedScale
   }
@@ -46,31 +58,23 @@ export function updatewm(delta, speedScale) {
 
 }
 
-function handleanim(delta, speedScale) {
-  document.querySelectorAll("[data-wm]").forEach(wm => {
-    if (currentFrameTime >= FRAME_TIME) {
-      wmFrame = (wmFrame + 1) % WM_FRAME_COUNT
-      wm.src = `imgs/panda-${wmFrame}.png`
-      currentFrameTime -= FRAME_TIME
-    }
-  })
-  currentFrameTime += delta * speedScale
-}
-
-
 export function getwmRects() {
   return [...document.querySelectorAll("[data-wm]")].map(wm => {
     return wm.getBoundingClientRect()
   })
 }
 
-function createwm() {
+function createwm(feiisselected) {
+  porw = pandaorwindmill(feiisselected)
   currentFrameTime = 1
   wmFrame = 1
   const wm = document.createElement("img")
   wm.dataset.wm = true
-  wm.src = `imgs/panda-${wmFrame}.png`
+  wm.src = `imgs/${porw}-${wmFrame}.png`
   wm.classList.add("wm")
+  if (feiisselected === 1) wm.style.height = '16%'
+  if (feiisselected === 0) wm.style.height = '22%'
+  console.log(wm.style.height)
   setCustomProperty(wm, "--left", 100)
   worldElem.append(wm)
 }

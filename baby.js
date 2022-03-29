@@ -5,6 +5,7 @@ import {
 } from "./updateCustomProperty.js"
 
 const bElem = document.querySelector("[data-b]")
+const babyend = document.querySelector("[babyend]")
 const B_FRAME_COUNT = 2
 const FRAME_TIME = 50
 const SPEED = 0.01
@@ -47,7 +48,15 @@ function handleRun(delta, speedScale) {
 
 export function setbEnd() {
   bElem.src = `imgs/baby-${randomNumberBaby}-car-0.png`
+  console.log(randomNumberBaby);
 }
+
+export function setbendscreen() {
+  console.log(randomNumberBaby);
+  babyend.src = `imgs/baby-${randomNumberBaby}.png`
+}
+
+
 
 export function getbRect() {
   return bElem.getBoundingClientRect()

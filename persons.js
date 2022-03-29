@@ -14,18 +14,31 @@ let isJumping
 let sFrame
 let currentFrameTime
 let yVelocity
-export function setups() {
-  isJumping = true
+
+export function setups(feiisselected) {
+  isJumping = false
   sFrame = 0
   currentFrameTime = 0
   yVelocity = 0
   setCustomProperty(sElem, "--bottom", 0)
   document.removeEventListener("keydown", onJump)
   document.addEventListener("keydown", onJump)
+  document.removeEventListener("touchstart", onJump)
+  document.addEventListener("touchstart", onJump)
+  
+  document.removeEventListener("click", onJump)
+  document.addEventListener("click", onJump)
+
+  if (feiisselected === 1){
+    sElem.src = `imgs/f-stationary.png`
+  }
+  if (feiisselected === 0){
+    sElem.src = `imgs/s-stationary.png`
+  }
 }
 
-export function updates(delta, speedScale) {
-  handleRun(delta, speedScale)
+export function updates(delta, speedScale, feiisselected) {
+  handleRun(delta, speedScale, feiisselected)
   handleJump(delta)
 }
 
@@ -33,25 +46,45 @@ export function getsRect() {
   return sElem.getBoundingClientRect()
 }
 
-export function setsLose() {
-  sElem.src = "imgs/f-lose.png"
+export function setsLose(feiisselected) {
+  if (feiisselected === 1){
+    sElem.src = "imgs/f-lose.png"
+  }
+  if (feiisselected === 0){
+    sElem.src = "imgs/s-lose.png"
+  }
 }
 
-export function setsEnd() {
-  sElem.src = "imgs/f-end.png"
+export function setsEnd(feiisselected) {
+  if (feiisselected === 1){
+    sElem.src = "imgs/f-end.png"
+  }
+  if (feiisselected === 0){
+    sElem.src = "imgs/s-end.png"
+  }  
   setCustomProperty(sElem, "--bottom", 0)
 }
 
 
-function handleRun(delta, speedScale) {
+function handleRun(delta, speedScale, feiisselected) {
   if (isJumping) {
-    sElem.src = `imgs/f-stationary.png`
+    if (feiisselected === 1){
+      sElem.src = `imgs/f-stationary.png`
+    }
+    if (feiisselected === 0){
+      sElem.src = `imgs/s-stationary.png`
+    }
     return
   }
 
   if (currentFrameTime >= FRAME_TIME) {
     sFrame = (sFrame + 1) % S_FRAME_COUNT
-    sElem.src = `imgs/f-run-${sFrame}.png`
+    if (feiisselected === 1){
+      sElem.src = `imgs/f-run-${sFrame}.png`
+    }
+    if (feiisselected === 0){
+      sElem.src = `imgs/s-run-${sFrame}.png`
+    }
     currentFrameTime -= FRAME_TIME
   }
   currentFrameTime += delta * speedScale
@@ -72,8 +105,7 @@ function handleJump(delta) {
 }
 
 function onJump(e) {
-  if (e.code !== "Space" || isJumping) return
-
+  if ((e.code !== "Space" && e.type !== "click") || isJumping) return
   yVelocity = JUMP_SPEED
   isJumping = true
 }

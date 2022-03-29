@@ -85,6 +85,7 @@ body {
 
 .persons {
   --bottom: 0;
+  z-index: 1;
   position: absolute; 
   left: 15%;
   height: 30%;
@@ -93,6 +94,7 @@ body {
 
 .personf {
   --bottom: 0;
+  z-index: 1;
   position: absolute;
   left: 10%;
   height: 30%;
@@ -117,7 +119,7 @@ body {
 .wm {
   position: absolute;
   left: calc(var(--left) * 1%);
-  height: 20%;
+  height: 30%;
   bottom: 0;
 }
 
@@ -159,4 +161,29 @@ body {
   bottom:0;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.couple{
+  position: absolute;
+  height: 65%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.baby-text {
+  bottom:0;
+  position: absolute;
+  z-index:1;
+  font-size: 5vmin;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.babyend {
+  position: absolute;
+  z-index:1;
+  height: 30%;
+  left: 50%;
+  bottom:12%;
+  transform: translate(-50%);
 }
