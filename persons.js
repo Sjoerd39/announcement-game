@@ -8,7 +8,7 @@ const sElem = document.querySelector("[data-s]")
 const JUMP_SPEED = 0.45
 const GRAVITY = 0.0015
 const S_FRAME_COUNT = 2
-const FRAME_TIME = 100
+const FRAME_TIME = 200
 
 let isJumping
 let sFrame

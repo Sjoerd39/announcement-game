@@ -6,8 +6,8 @@ import {
 
 const fElem = document.querySelector("[data-f]")
 const F_FRAME_COUNT = 2
-const FRAME_TIME = 100
-const INTRO_FRAME_TIME = 100
+const FRAME_TIME = 200
+const INTRO_FRAME_TIME = 200
 
 let fFrame
 let currentFrameTime
