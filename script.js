@@ -9,7 +9,7 @@ import { updateb, setupb, getbRect, setbEnd, setbendscreen} from "./baby.js"
 import { setupfw, updatefw } from "./fireworks.js"
 
 // to do:
-// change follower based on feiisselected
+// V change follower based on feiisselected
 // change triggers based on feiisselected
 // clean up texts layout
 // add sound
@@ -100,7 +100,7 @@ function update(time) {
   if (end <= 0) {
     updateGround(delta, speedScale)
     updates(delta, speedScale, feiisselected)
-    if (join >= 1) updatef(delta, speedScale, join)
+    if (join >= 1) updatef(delta, speedScale, join, feiisselected)
     updatewm(delta, speedScale, feiisselected)
     updateSpeedScale(delta, end)
     updateScore(delta)
@@ -198,7 +198,7 @@ function handleStart() {
 
 function handleLose() {
   setsLose(feiisselected)
-  if (join >= 1) setfLose()
+  if (join >= 1) setfLose(feiisselected)
   setTimeout(() => {
     document.addEventListener("keydown", startscreen, { once: true })
     document.addEventListener("touchstart", startscreen, { once: true })
@@ -221,7 +221,7 @@ function handleLeave() {
 function handleEnd() {
   end = 1
   setsEnd(feiisselected)
-  setfEnd()
+  setfEnd(feiisselected)
   setupwm()
   fwElem.classList.remove("hide")
   document.addEventListener("keydown", endscreen, { once: true })

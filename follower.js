@@ -14,6 +14,16 @@ let currentFrameTime
 let currentintroFrameTime
 let introfFrame
 let yVelocity
+let fors
+
+function feiorsjoerd(feiisselected){
+  if (feiisselected === 1){
+    return fors =  `s`
+  }
+  if (feiisselected === 0){
+    return fors = 'f'
+  }
+}
 
 export function setupf() {
   fFrame = 0
@@ -24,20 +34,22 @@ export function setupf() {
   setCustomProperty(fElem, "--bottom", 0)
 }
 
-export function updatef(delta, speedScale, join) {
-  handleRun(delta, speedScale, join)
+export function updatef(delta, speedScale, join, feiisselected) {
+  handleRun(delta, speedScale, join, feiisselected)
 }
 
 export function getfRect() {
   return fElem.getBoundingClientRect()
 }
 
-export function setfLose() {
-  fElem.src = "imgs/s-lose.png"
+export function setfLose(feiisselected) {
+  fors = feiorsjoerd(feiisselected)
+  fElem.src = `imgs/${fors}-lose.png`
 }
 
-export function setfEnd() {
-  fElem.src = "imgs/s-end.png"
+export function setfEnd(feiisselected) {
+  fors = feiorsjoerd(feiisselected)
+  fElem.src = `imgs/${fors}-end.png`
 }
 
 export function setfjoin() {
@@ -57,7 +69,8 @@ export function setfleave() {
   fElem.src = `imgs/cloud-0.png`
 }
 
-function handleRun(delta, speedScale, join) {
+function handleRun(delta, speedScale, join, feiisselected) {
+  fors = feiorsjoerd(feiisselected)
   if (currentintroFrameTime >= FRAME_TIME & introfFrame <= 4 & join == 1) {
     introfFrame = (introfFrame + 1)
     fElem.src = `imgs/heart-${introfFrame}.png`
@@ -65,7 +78,7 @@ function handleRun(delta, speedScale, join) {
   }  
   if (currentFrameTime >= FRAME_TIME & introfFrame >= 5 & join == 1) {
     fFrame = (fFrame + 1) % F_FRAME_COUNT
-    fElem.src = `imgs/s-run-${fFrame}.png`
+    fElem.src = `imgs/${fors}-run-${fFrame}.png`
     currentFrameTime -= FRAME_TIME
   }
 
