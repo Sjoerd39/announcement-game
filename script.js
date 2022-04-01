@@ -8,14 +8,46 @@ import { setfEnd, setfjoin, setfleave, setfLose, setupf, updatef } from "./follo
 import { updateb, setupb, getbRect, setbEnd, setbendscreen} from "./baby.js"
 import { setupfw, updatefw } from "./fireworks.js"
 
+var sfx = {
+  jump: new Howl({
+    src: ['/sounds/mariojump.mp3'],
+    volume: 0.1
+  }),
+
+  join: new Howl({
+    src: [''],
+    volume: 0.1
+  }),
+
+  leave: new Howl({
+    src: [''],
+    volume: 0.1
+  }),
+
+  baby: new Howl({
+    src: [''],
+    volume: 0.1
+  })
+}
+
+var music = {
+  background: new Howl({
+    src: [''],
+    volume: 0.1,
+    loop:true
+  }),
+
+  ending: new Howl({
+    src: [''],
+    volume: 0.1
+  })
+}
+
 // to do:
-// V change follower based on feiisselected
-// V change triggers based on feiisselected
 // clean up texts layout
 // add sound
-// v put game online
-// V test mobile (controls)
 // clean up images
+// add custom domain
 
 const WORLD_WIDTH = 75  
 const WORLD_HEIGHT = 30

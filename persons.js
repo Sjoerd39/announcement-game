@@ -106,6 +106,14 @@ function handleJump(delta) {
 
 function onJump(e) {
   if ((e.code !== "Space" && e.type !== "click") || isJumping) return
+  sfx.jump.play()
   yVelocity = JUMP_SPEED
   isJumping = true
+}
+
+var sfx = {
+  jump: new Howl({
+    src: ['/sounds/mariojump.mp3'],
+    volume: 0.01
+  })
 }
