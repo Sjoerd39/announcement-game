@@ -7,7 +7,7 @@ import {
 const bElem = document.querySelector("[data-b]")
 const babyend = document.querySelector("[babyend]")
 const B_FRAME_COUNT = 2
-const FRAME_TIME = 50
+const FRAME_TIME = 190
 const SPEED = 0.01
 
 let bFrame

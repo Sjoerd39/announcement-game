@@ -89,8 +89,6 @@ function handleRun(delta, speedScale, feiisselected) {
   }
 
   currentFrameTime += delta * speedScale
-  console.log(sElem.src)
-  console.log(currentFrameTime)
 }
 
 function handleJump(delta) {

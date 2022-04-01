@@ -10,11 +10,12 @@ import { setupfw, updatefw } from "./fireworks.js"
 
 // to do:
 // V change follower based on feiisselected
-// change triggers based on feiisselected
+// V change triggers based on feiisselected
 // clean up texts layout
 // add sound
-// put game online
-// test mobile (controls)
+// v put game online
+// V test mobile (controls)
+// clean up images
 
 const WORLD_WIDTH = 75  
 const WORLD_HEIGHT = 30
@@ -190,10 +191,10 @@ function handleStart() {
   fwElem.classList.add("hide")
   fElem.classList.add("hide")
   window.requestAnimationFrame(update)
-  setupendtrigger()  
-  setupjointrigger()
-  setupjointrigger2()
-  setupleavetrigger()
+  setupendtrigger(feiisselected)  
+  setupjointrigger(feiisselected)
+  setupjointrigger2(feiisselected)
+  setupleavetrigger(feiisselected)
 }
 
 function handleLose() {
@@ -224,8 +225,10 @@ function handleEnd() {
   setfEnd(feiisselected)
   setupwm()
   fwElem.classList.remove("hide")
-  document.addEventListener("keydown", endscreen, { once: true })
-  document.addEventListener("touchstart", endscreen, { once: true })
+  setTimeout(() => {
+    document.addEventListener("keydown", endscreen, { once: true })
+    document.addEventListener("touchstart", endscreen, { once: true })
+  }, 3000)
 }
 
 function handlebabystop() {
@@ -239,8 +242,10 @@ function endscreen(){
   gameelem.classList.add("hide")
   setbendscreen()
   endelem.classList.remove("hide")
-  document.addEventListener("keydown", startscreen, { once: true })
-  document.addEventListener("touchstart", startscreen, { once: true })
+  setTimeout(() => {
+    document.addEventListener("keydown", startscreen, { once: true })
+    document.addEventListener("touchstart", startscreen, { once: true })
+  }, 1500)
 }
 
 function setPixelToWorldScale() {
