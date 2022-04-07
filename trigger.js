@@ -76,7 +76,7 @@ export function getjointriggerRect2() {
 // endtrigger
 export function setupendtrigger(feiisselected) {
   if (feiisselected === 1){
-    setCustomProperty(endtrigger, "--left", 635)
+    setCustomProperty(endtrigger, "--left", 65)
     setCustomProperty(endtrigger, "--bottom", 0)
   }
   if (feiisselected === 0){

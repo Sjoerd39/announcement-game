@@ -12,7 +12,6 @@ import { setupfw, updatefw } from "./fireworks.js"
 
 // to do:
 // clean up texts layout
-// x add sound
 // clean up images
 // add custom domain
 
@@ -44,6 +43,7 @@ let babyrun
 let feiisselected
 let selectfei
 let selectsjoerd
+let selectend
 
 feiisselected = 2
 
@@ -255,10 +255,11 @@ function endscreen(){
   gameelem.classList.add("hide")
   setbendscreen()
   endelem.classList.remove("hide")
+  selectend = document.getElementById('babyend')
   setTimeout(() => {
-    document.addEventListener("keydown", document.location.reload(true), { once: true })
-    document.addEventListener("touchstart", document.location.reload(true), { once: true })
-  }, 1500)
+    selectend.addEventListener("click", rld, {once : true})
+    selectend.addEventListener("touchstart", rld, {once : true})
+  }, 500)
 }
 
 function setPixelToWorldScale() {
@@ -274,6 +275,11 @@ function setPixelToWorldScale() {
   charselelem.style.width = `${WORLD_WIDTH * worldToPixelScale}px`
   charselelem.style.height = `${WORLD_HEIGHT * worldToPixelScale}px`
 }
+
+function rld() {
+  document.location.reload()
+}
+
 
 // sounds
 var sfx = {
