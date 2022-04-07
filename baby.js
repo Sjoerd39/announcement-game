@@ -22,7 +22,7 @@ export function setupb() {
   currentFrameTime = 0
   yVelocity = 0
   setCustomProperty(bElem, "--bottom", 0)
-  setCustomProperty(bElem, "--left", 725)
+  setCustomProperty(bElem, "--left", 725) //725
 }
 
 export function updateb(delta, speedScale) {
@@ -48,15 +48,11 @@ function handleRun(delta, speedScale) {
 
 export function setbEnd() {
   bElem.src = `imgs/baby-${randomNumberBaby}-car-0.png`
-  console.log(randomNumberBaby);
 }
 
 export function setbendscreen() {
-  console.log(randomNumberBaby);
   babyend.src = `imgs/baby-${randomNumberBaby}.png`
 }
-
-
 
 export function getbRect() {
   return bElem.getBoundingClientRect()

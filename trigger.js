@@ -15,7 +15,7 @@ const SPEED = 0.01
 // jointrigger
 export function setupjointrigger(feiisselected) {
   if (feiisselected === 1){
-  setCustomProperty(jointrigger, "--left", 240)
+  setCustomProperty(jointrigger, "--left", 240) //240
   setCustomProperty(jointrigger, "--bottom", 0)
   }
   if (feiisselected === 0){

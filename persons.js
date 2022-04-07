@@ -16,7 +16,7 @@ let currentFrameTime
 let yVelocity
 
 export function setups(feiisselected) {
-  isJumping = false
+  isJumping = true
   sFrame = 0
   currentFrameTime = 0
   yVelocity = 0
@@ -114,6 +114,6 @@ function onJump(e) {
 var sfx = {
   jump: new Howl({
     src: ['/sounds/mariojump.mp3'],
-    volume: 0.01
+    volume: 0.06
   })
 }

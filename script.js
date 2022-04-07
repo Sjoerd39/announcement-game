@@ -8,44 +8,11 @@ import { setfEnd, setfjoin, setfleave, setfLose, setupf, updatef } from "./follo
 import { updateb, setupb, getbRect, setbEnd, setbendscreen} from "./baby.js"
 import { setupfw, updatefw } from "./fireworks.js"
 
-var sfx = {
-  jump: new Howl({
-    src: ['/sounds/mariojump.mp3'],
-    volume: 0.1
-  }),
-
-  join: new Howl({
-    src: [''],
-    volume: 0.1
-  }),
-
-  leave: new Howl({
-    src: [''],
-    volume: 0.1
-  }),
-
-  baby: new Howl({
-    src: [''],
-    volume: 0.1
-  })
-}
-
-var music = {
-  background: new Howl({
-    src: [''],
-    volume: 0.1,
-    loop:true
-  }),
-
-  ending: new Howl({
-    src: [''],
-    volume: 0.1
-  })
-}
+// var id2 = sound.play();
 
 // to do:
 // clean up texts layout
-// add sound
+// x add sound
 // clean up images
 // add custom domain
 
@@ -62,8 +29,6 @@ const fwElem = document.querySelector("[data-fw]")
 const charselelem = document.querySelector("[data-charsel")
 const gameelem = document.querySelector("[data-game")
 const endelem = document.querySelector("[data-endscreen")
-// const selfei = document.querySelector("[selfei")
-// const selsjoerd = document.querySelector("[selsjoerd")
 
 setPixelToWorldScale()
 window.addEventListener("resize", setPixelToWorldScale)
@@ -94,33 +59,42 @@ function startscreen(){
   // startscreen controls
   selectfei = document.getElementById('selfei')
   selectfei.addEventListener("click", feiselected, { once: true })
-  selectfei.addEventListener("touchstart", feiselected);
+  selectfei.addEventListener("touchstart", feiselected, { once: true }) 
 
   selectsjoerd = document.getElementById('selsjoerd')
   selectsjoerd.addEventListener("click", sjoerdselected, { once: true })
-  selectsjoerd.addEventListener("touchstart", sjoerdselected);
+  selectsjoerd.addEventListener("touchstart", sjoerdselected, { once: true })
 }
 
 function feiselected(){
   feiisselected = 1
-  document.addEventListener("keydown", handleStart, { once: true })
-  document.addEventListener("touchstart", handleStart, { once: true })
+  setTimeout(() => {
+    document.addEventListener("keydown", handleStart, { once: true })
+    document.addEventListener("touchstart", handleStart, { once: true })
+  }, 350)
   gameelem.classList.remove("hide")
   charselelem.classList.add("hide")
   setups(feiisselected)
   setupGround(feiisselected)
+  music.background.play()
+  music.ending.stop()
+  sfx.choosef.play()
 }
 
 function sjoerdselected(){
   feiisselected = 0
-  document.addEventListener("keydown", handleStart, { once: true })
-  document.addEventListener("touchstart", handleStart, { once: true })
+  setTimeout(() => {
+    document.addEventListener("keydown", handleStart, { once: true })
+    document.addEventListener("touchstart", handleStart, { once: true })
+  }, 350)
   gameelem.classList.remove("hide")
   charselelem.classList.add("hide")
   setups(feiisselected)
   setupGround(feiisselected)
+  music.background.play()
+  music.ending.stop()
+  sfx.chooses.play()
 }
-
 
 function update(time) {
   if (lastTime == null) {
@@ -142,6 +116,11 @@ function update(time) {
     updatejointrigger2(delta, speedScale)
     updateleavetrigger(delta, speedScale)
   }
+
+  if (end === 1) music.background.stop()
+  if (end === 1 & !music.ending.playing()) music.ending.play()
+  if (end === 1 & !sfx.fireworks.playing()) sfx.fireworks.play()
+
   if (babyrun <= 0) updateb(delta, speedScale)
   updatefw(delta, speedScale)
   // 
@@ -150,8 +129,8 @@ function update(time) {
   if (checkleave()) handleLeave()
   if (checkjoin2()) handleJoin()
   if (checkEnd()) handleEnd()
-  if (checkbabystop()) handlebabystop()
-  
+  if (checkbabystop()) handlebabystop() 
+
   lastTime = time
   window.requestAnimationFrame(update)
 }
@@ -236,18 +215,21 @@ function handleLose() {
     document.addEventListener("keydown", startscreen, { once: true })
     document.addEventListener("touchstart", startscreen, { once: true })
   }, 100)
- 
+  if(!sfx.leave.playing()) sfx.leave.play()
 }
+
 
 function handleJoin() {
   join = 1
   setfjoin()
   fElem.classList.remove("hide")
+  if(!sfx.join.playing()) sfx.join.play()
 }
 
 function handleLeave() {
   join = 2
   setfleave()
+  if(!sfx.leave.playing()) sfx.leave.play()
 }
 
 // 
@@ -260,14 +242,13 @@ function handleEnd() {
   setTimeout(() => {
     document.addEventListener("keydown", endscreen, { once: true })
     document.addEventListener("touchstart", endscreen, { once: true })
-  }, 3000)
+  }, 1500)
 }
 
 function handlebabystop() {
   babyrun = 1
   setbEnd()
   endtextElem.classList.remove("hide")
-
 }
 
 function endscreen(){
@@ -275,8 +256,8 @@ function endscreen(){
   setbendscreen()
   endelem.classList.remove("hide")
   setTimeout(() => {
-    document.addEventListener("keydown", startscreen, { once: true })
-    document.addEventListener("touchstart", startscreen, { once: true })
+    document.addEventListener("keydown", document.location.reload(true), { once: true })
+    document.addEventListener("touchstart", document.location.reload(true), { once: true })
   }, 1500)
 }
 
@@ -292,4 +273,47 @@ function setPixelToWorldScale() {
   worldElem.style.height = `${WORLD_HEIGHT * worldToPixelScale}px`
   charselelem.style.width = `${WORLD_WIDTH * worldToPixelScale}px`
   charselelem.style.height = `${WORLD_HEIGHT * worldToPixelScale}px`
+}
+
+// sounds
+var sfx = {
+  join: new Howl({
+    src: ['/sounds/kiss.mp3'],
+    volume: 0.15
+  }),
+
+  leave: new Howl({
+    src: ['/sounds/ohno.mp3'],
+    volume: 0.15
+  }),
+
+  fireworks: new Howl({
+    src: ['/sounds/FireworksSF.mp3'],
+    volume: 0.3,
+    loop: true
+  }),
+
+  choosef: new Howl({
+    src: ['/sounds/fei.mp3'],
+    volume: 0.2
+  }),
+  
+  chooses: new Howl({
+    src: ['/sounds/sjoerd.mp3'],
+    volume: 0.2
+  })
+}
+
+var music = {
+  background: new Howl({
+    src: ['/sounds/backgroundmusic.mp3'],
+    volume: 0.1,
+    loop:true
+  }),
+
+  ending: new Howl({
+    src: ['/sounds/fireworkmusic.mp3'],
+    volume: 0.09,
+    loop:true 
+  })
 }
