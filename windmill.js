@@ -72,8 +72,8 @@ function createwm(feiisselected) {
   wm.dataset.wm = true
   wm.src = `imgs/${porw}-${wmFrame}.png`
   wm.classList.add("wm")
-  if (feiisselected === 1) wm.style.height = '16%'
-  if (feiisselected === 0) wm.style.height = '20%'
+  if (feiisselected === 1) wm.style.height = '12%'
+  if (feiisselected === 0) wm.style.height = '16%'
   setCustomProperty(wm, "--left", 100)
   worldElem.append(wm)
 }

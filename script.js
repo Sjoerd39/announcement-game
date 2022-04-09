@@ -8,12 +8,8 @@ import { setfEnd, setfjoin, setfleave, setfLose, setupf, updatef } from "./follo
 import { updateb, setupb, getbRect, setbEnd, setbendscreen} from "./baby.js"
 import { setupfw, updatefw } from "./fireworks.js"
 
-// var id2 = sound.play();
-
 // to do:
 // clean up texts layout
-// clean up images
-// add custom domain
 
 const WORLD_WIDTH = 75  
 const WORLD_HEIGHT = 30
@@ -123,8 +119,8 @@ function update(time) {
 
   if (babyrun <= 0) updateb(delta, speedScale)
   updatefw(delta, speedScale)
-  // 
-  // if (checkLose()) return handleLose()
+  
+  if (checkLose()) return handleLose()
   if (checkjoin()) handleJoin()
   if (checkleave()) handleLeave()
   if (checkjoin2()) handleJoin()
@@ -212,8 +208,8 @@ function handleLose() {
   setsLose(feiisselected)
   if (join >= 1) setfLose(feiisselected)
   setTimeout(() => {
-    document.addEventListener("keydown", startscreen, { once: true })
-    document.addEventListener("touchstart", startscreen, { once: true })
+    document.addEventListener("keydown", rld, { once: true })
+    document.addEventListener("touchstart", rld, { once: true })
   }, 100)
   if(!sfx.leave.playing()) sfx.leave.play()
 }
