@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<title>F&S Game</title>
 <html lang="en">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" 
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -12,7 +13,7 @@
 <body>
   <div class="world" data-world>
     <div class="char-select" data-charsel> 
-      <div class="sel-player" sel-player> Select a Player 选择一名球员<br>
+      <div class="sel-player" sel-player> Select a Player 选择一名玩家<br>
       Fei 菲------  or ----- Sjoerd 大树</div>
       <img src="imgs/f-stationary.png" class="selfei" selfei id="selfei">
       <img src="imgs/s-stationary.png" class="selsjoerd" selsjoerd id="selsjoerd">
@@ -22,11 +23,11 @@
     </div>
     <div class="game" data-game>
       <div class="score" data-score>0</div>
-      <div class="start-screen" data-start-screen>Press Any Key To Start 按任意键开始 <br> 
-      Press space-bar to jump 按空格键跳跃</div>
+      <div class="start-screen" data-start-screen>Press space-bar or tap the screen to jump<br> 
+      按空格键或点击屏幕进行跳跃</div>
       <div class="end-text" data-end-text>We're expecting a baby! <br>
-        我们期待一个婴儿！<br>
-        We verwachten een baby! 
+        我们在期待一个宝宝！<br>
+        Er is een baby op komst! 
       </div>
       <!-- <img src="imgs/trigger.png" class="levels" data-ground> -->
       <img src="imgs/level-f.png" class="levels" data-ground>
@@ -45,7 +46,8 @@
     <div class="end-screen" data-endscreen> 
       <img src="imgs/couple-pic.png" class="couple" couple id="couple">
       <img src="imgs/trigger.png" class="babyend" babyend id="babyend">
-      <div class="baby-text" baby-text> Expected: Octobre 2022 </div>
+      <div class="baby-text" baby-text> Expected: October 2022 </div>
+      <div class="baby-text"> Click on the baby to try again</div>
     </div>
     
   </div>

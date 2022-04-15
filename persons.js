@@ -23,8 +23,8 @@ export function setups(feiisselected) {
   setCustomProperty(sElem, "--bottom", 0)
   document.removeEventListener("keydown", onJump)
   document.addEventListener("keydown", onJump)
-  document.removeEventListener("touchstart", onJump)
-  document.addEventListener("touchstart", onJump)
+  document.removeEventListener("touchend", onJump)
+  document.addEventListener("touchend", onJump)
   
   document.removeEventListener("click", onJump)
   document.addEventListener("click", onJump)
@@ -113,7 +113,10 @@ function onJump(e) {
 
 var sfx = {
   jump: new Howl({
-    src: ['/sounds/mariojump.mp3'],
-    volume: 0.06
+    // src: ['/sounds/mariojump.mp3'],
+    src: ['https://www.mboxdrive.com/mariojump.mp3'],
+    format: ['mp3'],
+    // html5: true,
+    volume: 0.6
   })
 }

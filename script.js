@@ -10,7 +10,6 @@ import { setupfw, updatefw } from "./fireworks.js"
 
 // to do:
 // clean up texts layout
-// add custom domain
 
 const WORLD_WIDTH = 75  
 const WORLD_HEIGHT = 30
@@ -56,18 +55,18 @@ function startscreen(){
   // startscreen controls
   selectfei = document.getElementById('selfei')
   selectfei.addEventListener("click", feiselected, { once: true })
-  selectfei.addEventListener("touchstart", feiselected, { once: true }) 
+  selectfei.addEventListener("touchend", feiselected, { once: true }) 
 
   selectsjoerd = document.getElementById('selsjoerd')
   selectsjoerd.addEventListener("click", sjoerdselected, { once: true })
-  selectsjoerd.addEventListener("touchstart", sjoerdselected, { once: true })
+  selectsjoerd.addEventListener("touchend", sjoerdselected, { once: true })
 }
 
 function feiselected(){
   feiisselected = 1
   setTimeout(() => {
     document.addEventListener("keydown", handleStart, { once: true })
-    document.addEventListener("touchstart", handleStart, { once: true })
+    document.addEventListener("touchend", handleStart, { once: true })
   }, 350)
   gameelem.classList.remove("hide")
   charselelem.classList.add("hide")
@@ -82,7 +81,7 @@ function sjoerdselected(){
   feiisselected = 0
   setTimeout(() => {
     document.addEventListener("keydown", handleStart, { once: true })
-    document.addEventListener("touchstart", handleStart, { once: true })
+    document.addEventListener("touchend", handleStart, { once: true })
   }, 350)
   gameelem.classList.remove("hide")
   charselelem.classList.add("hide")
@@ -210,7 +209,7 @@ function handleLose() {
   if (join >= 1) setfLose(feiisselected)
   setTimeout(() => {
     document.addEventListener("keydown", rld, { once: true })
-    document.addEventListener("touchstart", rld, { once: true })
+    document.addEventListener("touchend", rld, { once: true })
   }, 100)
   if(!sfx.leave.playing()) sfx.leave.play()
 }
@@ -238,7 +237,7 @@ function handleEnd() {
   fwElem.classList.remove("hide")
   setTimeout(() => {
     document.addEventListener("keydown", endscreen, { once: true })
-    document.addEventListener("touchstart", endscreen, { once: true })
+    document.addEventListener("touchend", endscreen, { once: true })
   }, 1500)
 }
 
@@ -255,7 +254,7 @@ function endscreen(){
   selectend = document.getElementById('babyend')
   setTimeout(() => {
     selectend.addEventListener("click", rld, {once : true})
-    selectend.addEventListener("touchstart", rld, {once : true})
+    selectend.addEventListener("touchend", rld, {once : true})
   }, 500)
 }
 
@@ -281,42 +280,52 @@ function rld() {
 // sounds
 var sfx = {
   join: new Howl({
-    src: ['/sounds/kiss.mp3'],
+    src: ['https://www.mboxdrive.com/kiss.mp3'],
+    // src: ['/sounds/kiss.mp3'],
     volume: 0.15
   }),
 
   leave: new Howl({
-    src: ['/sounds/ohno.mp3'],
+    // src: ['/sounds/ohno.mp3'],
+    src: ['https://www.mboxdrive.com/ohno.mp3'],
     volume: 0.15
   }),
 
   fireworks: new Howl({
-    src: ['/sounds/FireworksSF.mp3'],
+    src: ['https://www.mboxdrive.com/FireworksSF.mp3'],
+    // src: ['/sounds/FireworksSF.mp3'],
     volume: 0.3,
-    loop: true
+    loop: true,
+    html5: true
   }),
 
   choosef: new Howl({
-    src: ['/sounds/fei.mp3'],
+    // src: ['/sounds/fei.mp3'],
+    src: ['https://www.mboxdrive.com/fei.mp3'],
     volume: 0.2
   }),
   
   chooses: new Howl({
-    src: ['/sounds/sjoerd.mp3'],
+    src: ['https://www.mboxdrive.com/sjoerd.mp3'],
+    // src: ['/sounds/sjoerd.mp3'],
     volume: 0.2
   })
 }
 
 var music = {
   background: new Howl({
-    src: ['/sounds/backgroundmusic.mp3'],
+    src: ['https://www.mboxdrive.com/backgroundmusic.mp3'],
+    // src: ['/sounds/backgroundmusic.mp3'],
     volume: 0.1,
-    loop:true
+    loop:true,
+    html5: true
   }),
 
   ending: new Howl({
-    src: ['/sounds/fireworkmusic.mp3'],
+    src: ['https://www.mboxdrive.com/fireworkmusic.mp3'],
+    // src: ['/sounds/fireworkmusic.mp3'],
     volume: 0.09,
-    loop:true 
+    loop:true,
+    html5: true
   })
 }
