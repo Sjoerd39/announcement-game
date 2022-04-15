@@ -117,6 +117,6 @@ var sfx = {
     src: ['https://www.mboxdrive.com/mariojump.mp3'],
     format: ['mp3'],
     // html5: true,
-    volume: 0.6
+    volume: 0.06
   })
 }
