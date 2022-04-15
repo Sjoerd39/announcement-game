@@ -150,7 +150,7 @@ body {
 .sel-player {
   position: absolute;
   z-index:1;
-  font-size: 5vmin;
+  font-size: 3vmin;
   top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
