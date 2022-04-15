@@ -210,6 +210,7 @@ function handleLose() {
   setTimeout(() => {
     document.addEventListener("keydown", rld, { once: true })
     document.addEventListener("touchend", rld, { once: true })
+
   }, 100)
   if(!sfx.leave.playing()) sfx.leave.play()
 }
